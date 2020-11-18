@@ -21,6 +21,14 @@ This path should typically be the path that is passed with O= to the
 kernel build.  It will be used for finding generated header files when
 checking syntax.")
 
+(defvar kernel-vendor-include-path '()
+  "List of paths to vendor-provided include directories.
+
+When working on kernel trees for vendor-supplied kernels, custom
+include paths are often required for out-of-tree headers.  These paths
+may be added to this variable and the paths will be passed with -I to
+flycheck.")
+
 (defvar kernel-arch "x86"
   "Value of the ARCH= variable passed to the kernel build.")
 
@@ -58,15 +66,17 @@ checking syntax.")
 	 "error=strict-prototypes"
 	 "error=date-time"
 	 "error=incompatible-pointer-types"))
-     '(flycheck-gcc-include-path
-       `(,(concat kernel-source-tree "/arch/" kernel-arch "/include")
-	 ,(concat kernel-build-dir "/arch/" kernel-arch "/include/generated/uapi")
-	 ,(concat kernel-build-dir "/arch/" kernel-arch "/include/generated")
-	 ,(concat kernel-source-tree "/include")
-	 ,(concat kernel-build-dir "/include")
-	 ,(concat kernel-source-tree "/arch/" kernel-arch "/include/uapi")
-	 ,(concat kernel-source-tree "/include/uapi")
-	 ,(concat kernel-build-dir "/include/generated/uapi")))))))
+     `(flycheck-gcc-include-path
+       (append
+	,kernel-vendor-include-path
+	`(,(concat kernel-source-tree "/arch/" kernel-arch "/include")
+	  ,(concat kernel-build-dir "/arch/" kernel-arch "/include/generated/uapi")
+	  ,(concat kernel-build-dir "/arch/" kernel-arch "/include/generated")
+	  ,(concat kernel-source-tree "/include")
+	  ,(concat kernel-build-dir "/include")
+	  ,(concat kernel-source-tree "/arch/" kernel-arch "/include/uapi")
+	  ,(concat kernel-source-tree "/include/uapi")
+	  ,(concat kernel-build-dir "/include/generated/uapi"))))))))
 
 (provide 'kernel)
 
