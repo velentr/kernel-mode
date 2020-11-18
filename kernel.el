@@ -35,7 +35,7 @@ flycheck.")
 (define-minor-mode kernel-mode
   "Minor mode for Linux kernel development."
   :init-value nil
-  :lighter " Kernel"
+  :lighter (" Kernel/" kernel-arch)
   :keymap nil
   (cond
    (kernel-mode
