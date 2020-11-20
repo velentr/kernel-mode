@@ -43,7 +43,7 @@ flycheck.")
     (setq tab-width 8)
     (setq indent-tabs-mode t)
     (let ((source-arch-path (concat kernel-source-tree "/arch/" kernel-arch))
-	  (build-arch-path (concat kernel-build-dir "/arch/" kernel-arch)))
+          (build-arch-path (concat kernel-build-dir "/arch/" kernel-arch)))
       (custom-set-variables
        ;; The kernel build also uses -nostdinc -isystem
        ;; /usr/lib/gcc-cross/aarch64-linux-gnu/5/include, but I'm not
@@ -51,34 +51,34 @@ flycheck.")
        ;; CROSS_COMPILE= may be necessary for some parts of the kernel.
        '(flycheck-gcc-language-standard "gnu89")
        '(flycheck-gcc-includes
-	 `(,(concat kernel-source-tree "/include/linux/kconfig.h")))
+         `(,(concat kernel-source-tree "/include/linux/kconfig.h")))
        '(flycheck-gcc-definitions '("__KERNEL__"))
        '(flycheck-gcc-warnings
-	 '("all"
-	   "undef"
-	   "strict-prototypes"
-	   "no-trigraphs"
-	   "error-implicit-function-declaration"
-	   "no-format-security"
-	   "frame-larger-than=2048"
-	   "no-unused-but-set-variable"
-	   "declaration-after-statement"
-	   "no-pointer-sign"
-	   "error=implicit-int"
-	   "error=strict-prototypes"
-	   "error=date-time"
-	   "error=incompatible-pointer-types"))
+         '("all"
+           "undef"
+           "strict-prototypes"
+           "no-trigraphs"
+           "error-implicit-function-declaration"
+           "no-format-security"
+           "frame-larger-than=2048"
+           "no-unused-but-set-variable"
+           "declaration-after-statement"
+           "no-pointer-sign"
+           "error=implicit-int"
+           "error=strict-prototypes"
+           "error=date-time"
+           "error=incompatible-pointer-types"))
        `(flycheck-gcc-include-path
-	 (append
-	  ,kernel-vendor-include-path
-	  `(,(concat source-arch-path "/include")
-	    ,(concat build-arch-path "/include/generated/uapi")
-	    ,(concat build-arch-path "/include/generated")
-	    ,(concat kernel-source-tree "/include")
-	    ,(concat kernel-build-dir "/include")
-	    ,(concat source-arch-path "/include/uapi")
-	    ,(concat kernel-source-tree "/include/uapi")
-	    ,(concat kernel-build-dir "/include/generated/uapi")))))))))
+         (append
+          ,kernel-vendor-include-path
+          `(,(concat source-arch-path "/include")
+            ,(concat build-arch-path "/include/generated/uapi")
+            ,(concat build-arch-path "/include/generated")
+            ,(concat kernel-source-tree "/include")
+            ,(concat kernel-build-dir "/include")
+            ,(concat source-arch-path "/include/uapi")
+            ,(concat kernel-source-tree "/include/uapi")
+            ,(concat kernel-build-dir "/include/generated/uapi")))))))))
 
 (provide 'kernel)
 
